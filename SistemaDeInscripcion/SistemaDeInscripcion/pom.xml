@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.6</version>
+        <version>3.5.14</version> <!-- Se ca,bió de 4.0.6 a 3.5.14 porque así sí es compatible con S3 -->
         <relativePath/>
     </parent>
     <groupId>com.duoc</groupId>
@@ -14,6 +14,21 @@
     <properties>
         <java.version>21</java.version>
     </properties>
+
+    <!-- Se agregó dependencyManagement con el BOM de Spring Cloud AWS
+         Esto permite declarar spring-cloud-aws-starter-s3 sin especificar versión -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.awspring.cloud</groupId>
+                <artifactId>spring-cloud-aws-dependencies</artifactId>
+                <version>3.3.0</version> 
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -58,6 +73,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <!-- Sse dejó sin <version> porque el BOM declarado en dependencyManagement
+             lo hace automáticamente -->
+        <dependency>
+            <groupId>io.awspring.cloud</groupId>
+            <artifactId>spring-cloud-aws-starter-s3</artifactId>
         </dependency>
     </dependencies>
 

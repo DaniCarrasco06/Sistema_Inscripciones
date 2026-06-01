@@ -1,13 +1,13 @@
 package com.duoc.sistemadeinscripcion.dto;
 
 import java.time.LocalDate;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-// DTO que representa la boleta/resumen de una inscripción.
- 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,25 +15,10 @@ import lombok.NoArgsConstructor;
 public class InscripcionResponseDTO {
 
     private Long inscripcionId;
-
-    // Datos del estudiante
     private String nombreEstudiante;
     private String correoEstudiante;
-
-    // Datos del curso
-    private Long cursoId;
-    private String nombreCurso;
-    private String descripcionCurso;
-    private String nombreInstructor;
-    private int duracionHoras;
-
-    // Costo y fecha
-    private int costoCurso;
+    private List<CursoDTO> cursosInscritos;
+    private int totalPagar;
     private LocalDate fechaInscripcion;
-
-    // Mensaje de confirmación
     private String mensaje;
 }
-
-
-

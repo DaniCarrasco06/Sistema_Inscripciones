@@ -1,12 +1,12 @@
 package com.duoc.sistemadeinscripcion.model;
 
 import java.time.LocalDate;
+import java.util.List;
+
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Entity
 @Data
@@ -20,16 +20,22 @@ public class Inscripcion {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_curso", referencedColumnName = "id")
-    private Curso curso;
-
-    @ManyToOne
     @JoinColumn(name = "id_estudiante", referencedColumnName = "id")
     private Usuario estudiante;
 
-    @NotNull(message = "La fecha de inscripción es obligatoria")
+    @ManyToMany
+    @JoinTable(
+        name = "INSCRIPCION_CURSO",
+        joinColumns = @JoinColumn(name = "id_inscripcion"),
+        inverseJoinColumns = @JoinColumn(name = "id_curso")
+    )
+    private List<Curso> cursos;
+
     @Column(name = "fecha_inscripcion")
     private LocalDate fechaInscripcion;
+
+    @Column(name = "total_pagar")
+    private int totalPagar;
 
     @PrePersist
     public void asignarFecha() {
@@ -38,4 +44,3 @@ public class Inscripcion {
         }
     }
 }
-

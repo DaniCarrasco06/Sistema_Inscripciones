@@ -1,11 +1,11 @@
 package com.duoc.sistemadeinscripcion.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.duoc.sistemadeinscripcion.dto.CursoDTO;
 import com.duoc.sistemadeinscripcion.dto.InscripcionResponseDTO;
 import com.duoc.sistemadeinscripcion.exception.ResourceNotFoundException;
 import com.duoc.sistemadeinscripcion.model.Curso;
@@ -14,7 +14,6 @@ import com.duoc.sistemadeinscripcion.model.Usuario;
 import com.duoc.sistemadeinscripcion.repository.CursoRepository;
 import com.duoc.sistemadeinscripcion.repository.InscripcionRepository;
 import com.duoc.sistemadeinscripcion.repository.UsuarioRepository;
-
 
 @Service
 public class InscripcionService {
@@ -28,67 +27,55 @@ public class InscripcionService {
     @Autowired
     private UsuarioRepository usuarioRepo;
 
-
-    // GET: Inscripciones por ID del curso
-    public List<Inscripcion> getInscripcionesByCurso(Long cursoId) {
-        return repo.findByCursoId(cursoId);
-    }
-
-    // GET: Inscripciones por ID del estudiante
-    public List<Inscripcion> getInscripcionesByEstudiante(Long estudianteId) {
-        return repo.findByEstudianteId(estudianteId);
-    }
-
-    // POST: Crear inscripción y retornar boleta con resumen
     @Transactional
-    public InscripcionResponseDTO createInscripcion(Inscripcion inscripcion) {
+    public InscripcionResponseDTO createInscripcion(Long estudianteId, List<Long> cursoIds) {
 
-
-        // 1. Verificar que el curso existe
-        Long cursoId = inscripcion.getCurso().getId();
-        Curso curso = cursoRepo.findById(cursoId)
-            .orElseThrow(() -> new ResourceNotFoundException(
-                "Curso no encontrado con ID: " + cursoId));
-
-
-        // 2. Verificar que el estudiante existe
-        Long estudianteId = inscripcion.getEstudiante().getId();
         Usuario estudiante = usuarioRepo.findById(estudianteId)
             .orElseThrow(() -> new ResourceNotFoundException(
                 "Estudiante no encontrado con ID: " + estudianteId));
 
-
-        // 3. Verificar que el estudiante no esté ya inscrito
-        if (repo.existsByCursoIdAndEstudianteId(cursoId, estudianteId)) {
-            throw new IllegalArgumentException(
-                "El estudiante ya está inscrito en este curso");
+        List<Curso> cursos = cursoRepo.findAllById(cursoIds);
+        if (cursos.isEmpty()) {
+            throw new ResourceNotFoundException("Ningún curso encontrado");
         }
 
+        int total = cursos.stream()
+            .mapToInt(Curso::getCosto)
+            .sum();
 
-        // 4. Asignar objetos completos y guardar
-        inscripcion.setCurso(curso);
+        Inscripcion inscripcion = new Inscripcion();
         inscripcion.setEstudiante(estudiante);
+        inscripcion.setCursos(cursos);
+        inscripcion.setTotalPagar(total);
         Inscripcion guardada = repo.save(inscripcion);
 
+        List<CursoDTO> cursosDTO = cursos.stream()
+            .map(c -> CursoDTO.builder()
+                .id(c.getId())
+                .nombre(c.getNombre())
+                .descripcion(c.getDescripcion())
+                .nombreProfesor(c.getProfesor() != null
+                    ? c.getProfesor().getNombre() : "Sin asignar")
+                .duracionHoras(c.getDuracionHoras())
+                .costo(c.getCosto())
+                .build())
+            .toList();
 
-        // 5. Construir y retornar la boleta/resumen
         return InscripcionResponseDTO.builder()
             .inscripcionId(guardada.getId())
             .nombreEstudiante(estudiante.getNombre())
             .correoEstudiante(estudiante.getCorreo())
-            .cursoId(curso.getId())
-            .nombreCurso(curso.getNombre())
-            .descripcionCurso(curso.getDescripcion())
-            .nombreInstructor(curso.getProfesor() != null
-                ? curso.getProfesor().getNombre() : "Sin asignar")
-            .duracionHoras(curso.getDuracionHoras())
-            .costoCurso(curso.getCosto())
+            .cursosInscritos(cursosDTO)
+            .totalPagar(total)
             .fechaInscripcion(guardada.getFechaInscripcion())
-            .mensaje("Inscripción exitosa. ¡Bienvenido al curso!")
+            .mensaje("Inscripción exitosa. ¡Bienvenido a los cursos!")
             .build();
     }
 
-    // DELETE: Eliminar inscripción
+    public List<Inscripcion> getInscripcionesByEstudiante(Long estudianteId) {
+        return repo.findByEstudianteId(estudianteId);
+    }
+
     public boolean deleteInscripcion(Long id) {
         if (repo.existsById(id)) {
             repo.deleteById(id);
@@ -97,4 +84,3 @@ public class InscripcionService {
         return false;
     }
 }
-

@@ -1,15 +1,15 @@
 package com.duoc.sistemadeinscripcion.controller;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.duoc.sistemadeinscripcion.dto.InscripcionResponseDTO;
-import com.duoc.sistemadeinscripcion.model.Inscripcion;
 import com.duoc.sistemadeinscripcion.service.InscripcionService;
-
 
 @RestController
 @RequestMapping("/api")
@@ -18,34 +18,29 @@ public class InscripcionController {
     @Autowired
     private InscripcionService service;
 
-    // GET inscripciones por ID del curso
-    @GetMapping("/inscripciones/curso/{cursoId}")
-    public ResponseEntity<List<Inscripcion>> obtenerPorCurso(@PathVariable Long cursoId) {
-        return ResponseEntity.ok(service.getInscripcionesByCurso(cursoId));
-    }
-
-    // GET inscripciones por ID del estudiante
-    @GetMapping("/inscripciones/estudiante/{estudianteId}")
-    public ResponseEntity<List<Inscripcion>> obtenerPorEstudiante(
-            @PathVariable Long estudianteId) {
-        return ResponseEntity.ok(service.getInscripcionesByEstudiante(estudianteId));
-    }
-
-    // POST inscribir estudiante 
     @PostMapping("/inscripciones")
     public ResponseEntity<InscripcionResponseDTO> crearInscripcion(
-            @RequestBody Inscripcion inscripcion) {
-        InscripcionResponseDTO boleta = service.createInscripcion(inscripcion);
+            @RequestBody Map<String, Object> request) {
+
+        Long estudianteId = Long.valueOf(request.get("estudianteId").toString());
+        List<Long> cursoIds = ((List<?>) request.get("cursoIds"))
+            .stream()
+            .map(id -> Long.valueOf(id.toString()))
+            .toList();
+
+        InscripcionResponseDTO boleta = service.createInscripcion(estudianteId, cursoIds);
         return ResponseEntity.status(HttpStatus.CREATED).body(boleta);
     }
 
-    // DELETE eliminar inscripción por ID
+    @GetMapping("/inscripciones/estudiante/{estudianteId}")
+    public ResponseEntity<?> obtenerPorEstudiante(@PathVariable Long estudianteId) {
+        return ResponseEntity.ok(service.getInscripcionesByEstudiante(estudianteId));
+    }
+
     @DeleteMapping("/inscripciones/{id}")
     public ResponseEntity<Void> eliminarInscripcion(@PathVariable Long id) {
-        boolean eliminada = service.deleteInscripcion(id);
-        return eliminada
+        return service.deleteInscripcion(id)
             ? ResponseEntity.ok().build()
             : ResponseEntity.notFound().build();
     }
 }
-

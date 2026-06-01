@@ -1,7 +1,7 @@
-package com.duoc.SistemaDeInscripcion.controller;
+package com.duoc.sistemadeinscripcion.controller;
 
-import com.duoc.SistemaDeInscripcion.model.Asset; 
-import com.duoc.SistemaDeInscripcion.service.AwsService; 
+import com.duoc.sistemadeinscripcion.model.Asset; 
+import com.duoc.sistemadeinscripcion.service.AwsService; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;

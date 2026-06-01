@@ -1,4 +1,4 @@
-package com.duoc.SistemaDeInscripcion.model;
+package com.duoc.sistemadeinscripcion.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;

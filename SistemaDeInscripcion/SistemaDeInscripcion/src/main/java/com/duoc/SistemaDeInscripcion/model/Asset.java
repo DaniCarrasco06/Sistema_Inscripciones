@@ -1,4 +1,4 @@
-package com.duoc.SistemaDeInscripcion.model;
+package com.duoc.sistemadeinscripcion.model;
 
 import lombok.Builder;
 import lombok.Value;

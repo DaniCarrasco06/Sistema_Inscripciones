@@ -1,9 +1,9 @@
-package com.duoc.SistemaDeInscripcion.service;
+package com.duoc.sistemadeinscripcion.service;
 
 // CAMBIO: se eliminó "import com.amazonaws.util.StringUtils" (SDK v1)
 // y se reemplaza usando java.nio.charset.StandardCharsets directamente
-import com.duoc.SistemaDeInscripcion.model.Asset; // CAMBIO: package actualizado al proyecto
-import com.duoc.SistemaDeInscripcion.repository.S3Repository; // CAMBIO: package actualizado al proyecto
+import com.duoc.sistemadeinscripcion.model.Asset; // CAMBIO: package actualizado al proyecto
+import com.duoc.sistemadeinscripcion.repository.S3Repository; // CAMBIO: package actualizado al proyecto
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.duoc.SistemaDeInscripcion.controller;
+package com.duoc.sistemadeinscripcion.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,9 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.duoc.SistemaDeInscripcion.dto.InscripcionResponseDTO;
-import com.duoc.SistemaDeInscripcion.model.Inscripcion;
-import com.duoc.SistemaDeInscripcion.service.InscripcionService;
+import com.duoc.sistemadeinscripcion.dto.InscripcionResponseDTO;
+import com.duoc.sistemadeinscripcion.model.Inscripcion;
+import com.duoc.sistemadeinscripcion.service.InscripcionService;
 
 
 @RestController

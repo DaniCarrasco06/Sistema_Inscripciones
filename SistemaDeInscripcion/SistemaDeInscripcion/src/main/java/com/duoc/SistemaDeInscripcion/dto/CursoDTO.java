@@ -5,17 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-// DTO para exponer datos del usuario sin incluir la contraseña.
- 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UsuarioResponseDTO {
-
+public class CursoDTO {
     private Long id;
     private String nombre;
-    private String correo;
-    private String rol;
+    private String descripcion;
+    private String nombreProfesor;
+    private int duracionHoras;
+    private int costo;
 }

@@ -1,4 +1,4 @@
-package com.duoc.SistemaDeInscripcion;
+package com.duoc.sistemadeinscripcion;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

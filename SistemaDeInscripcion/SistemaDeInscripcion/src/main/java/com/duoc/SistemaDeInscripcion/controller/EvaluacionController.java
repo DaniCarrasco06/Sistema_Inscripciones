@@ -1,4 +1,4 @@
-package com.duoc.SistemaDeInscripcion.controller;
+package com.duoc.sistemadeinscripcion.controller;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.duoc.SistemaDeInscripcion.model.Evaluacion;
-import com.duoc.SistemaDeInscripcion.service.EvaluacionService;
+import com.duoc.sistemadeinscripcion.model.Evaluacion;
+import com.duoc.sistemadeinscripcion.service.EvaluacionService;
 
 import jakarta.validation.Valid;
 

@@ -1,10 +1,10 @@
-package com.duoc.SistemaDeInscripcion.repository;
+package com.duoc.sistemadeinscripcion.repository;
 
 // S3ObjectInputStream de SDK v1 cambia a ResponseInputStream<GetObjectResponse> de SDK v2
 import software.amazon.awssdk.core.ResponseInputStream;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 
-import com.duoc.SistemaDeInscripcion.model.Asset; // CAMBIO: package actualizado al proyecto
+import com.duoc.sistemadeinscripcion.model.Asset; // CAMBIO: package actualizado al proyecto
 import java.io.File;
 import java.io.IOException;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.duoc.SistemaDeInscripcion.repository;
+package com.duoc.sistemadeinscripcion.repository;
 
 // Se cambia todos los imports de com.amazonaws (SDK v1) reemplazados por software.amazon.awssdk (SDK v2)
 import software.amazon.awssdk.core.ResponseInputStream;
@@ -16,7 +16,7 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.duoc.SistemaDeInscripcion.model.Asset; 
+import com.duoc.sistemadeinscripcion.model.Asset; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

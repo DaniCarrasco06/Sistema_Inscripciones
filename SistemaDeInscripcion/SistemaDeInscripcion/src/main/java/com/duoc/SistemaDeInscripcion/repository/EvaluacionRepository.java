@@ -1,9 +1,9 @@
-package com.duoc.SistemaDeInscripcion.repository;
+package com.duoc.sistemadeinscripcion.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.duoc.SistemaDeInscripcion.model.Evaluacion;
+import com.duoc.sistemadeinscripcion.model.Evaluacion;
 
 import java.util.List;
 

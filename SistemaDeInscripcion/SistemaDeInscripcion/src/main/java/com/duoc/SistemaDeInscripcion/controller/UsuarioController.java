@@ -1,4 +1,4 @@
-package com.duoc.SistemaDeInscripcion.controller;
+package com.duoc.sistemadeinscripcion.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,9 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.duoc.SistemaDeInscripcion.dto.UsuarioResponseDTO;
-import com.duoc.SistemaDeInscripcion.model.Usuario;
-import com.duoc.SistemaDeInscripcion.service.UsuarioService;
+import com.duoc.sistemadeinscripcion.dto.UsuarioResponseDTO;
+import com.duoc.sistemadeinscripcion.model.Usuario;
+import com.duoc.sistemadeinscripcion.service.UsuarioService;
 
 import jakarta.validation.Valid;
 

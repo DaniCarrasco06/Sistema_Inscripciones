@@ -1,4 +1,4 @@
-package com.duoc.SistemaDeInscripcion.dto;
+package com.duoc.sistemadeinscripcion.dto;
 
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.duoc.SistemaDeInscripcion.service;
+package com.duoc.sistemadeinscripcion.service;
 
 import java.util.List;
 
@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.duoc.SistemaDeInscripcion.dto.InscripcionResponseDTO;
-import com.duoc.SistemaDeInscripcion.exception.ResourceNotFoundException;
-import com.duoc.SistemaDeInscripcion.model.Curso;
-import com.duoc.SistemaDeInscripcion.model.Inscripcion;
-import com.duoc.SistemaDeInscripcion.model.Usuario;
-import com.duoc.SistemaDeInscripcion.repository.CursoRepository;
-import com.duoc.SistemaDeInscripcion.repository.InscripcionRepository;
-import com.duoc.SistemaDeInscripcion.repository.UsuarioRepository;
+import com.duoc.sistemadeinscripcion.dto.InscripcionResponseDTO;
+import com.duoc.sistemadeinscripcion.exception.ResourceNotFoundException;
+import com.duoc.sistemadeinscripcion.model.Curso;
+import com.duoc.sistemadeinscripcion.model.Inscripcion;
+import com.duoc.sistemadeinscripcion.model.Usuario;
+import com.duoc.sistemadeinscripcion.repository.CursoRepository;
+import com.duoc.sistemadeinscripcion.repository.InscripcionRepository;
+import com.duoc.sistemadeinscripcion.repository.UsuarioRepository;
 
 
 @Service

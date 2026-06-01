@@ -26,7 +26,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Construir imagen Docker
-       run: docker build -t ${{ secrets.DOCKER_USERNAME }}/sistema-inscripcion:latest ./SistemaDeInscripcion
+       run: docker build -t ${{ secrets.DOCKER_USERNAME }}/sistema-inscripcion:latest ./sistemadeinscripcion
 
       - name: Subir imagen Docker
         run: docker push ${{ secrets.DOCKER_USERNAME }}/sistema-inscripcion:latest

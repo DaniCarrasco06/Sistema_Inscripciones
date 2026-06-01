@@ -1,6 +1,6 @@
-package com.duoc.SistemaDeInscripcion.service;
+package com.duoc.sistemadeinscripcion.service;
 
-import com.duoc.SistemaDeInscripcion.model.Asset; 
+import com.duoc.sistemadeinscripcion.model.Asset; 
 
 import org.springframework.web.multipart.MultipartFile;
 

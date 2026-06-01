@@ -1,4 +1,4 @@
-package com.duoc.SistemaDeInscripcion.exception;
+package com.duoc.sistemadeinscripcion.exception;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;

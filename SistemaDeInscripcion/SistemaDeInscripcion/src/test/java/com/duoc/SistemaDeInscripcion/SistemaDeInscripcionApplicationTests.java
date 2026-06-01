@@ -1,10 +1,10 @@
-package com.duoc.SistemaDeInscripcion;
+package com.duoc.sistemadeinscripcion;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SistemaDeInscripcionApplicationTests {
+class sistemadeinscripcionApplicationTests {
 
 	@Test
 	void contextLoads() {

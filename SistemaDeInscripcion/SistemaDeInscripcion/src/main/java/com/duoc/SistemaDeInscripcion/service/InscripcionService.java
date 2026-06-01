@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import com.duoc.sistemadeinscripcion.dto.CursoDTO;
 import com.duoc.sistemadeinscripcion.dto.InscripcionResponseDTO;
 import com.duoc.sistemadeinscripcion.exception.ResourceNotFoundException;
@@ -48,6 +50,23 @@ public class InscripcionService {
         inscripcion.setCursos(cursos);
         inscripcion.setTotalPagar(total);
         Inscripcion guardada = repo.save(inscripcion);
+
+        try {
+            String contenido =
+            "RESUMEN DE INSCRIPCION\n" +
+            "ID: " + guardada.getId() + "\n" +
+            "Estudiante: " + estudiante.getNombre() + "\n" +
+            "Correo: " + estudiante.getCorreo() + "\n" +
+            "Total a pagar: " + total + "\n";
+
+            java.nio.file.Files.write(
+            java.nio.file.Paths.get("resumen_" + guardada.getId() + ".txt"),
+            contenido.getBytes()
+            );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         List<CursoDTO> cursosDTO = cursos.stream()
             .map(c -> CursoDTO.builder()
